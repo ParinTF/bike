@@ -7,6 +7,16 @@
 
         <h1><i class="fa fa-shopping-cart"></i> รายการสินค้า</h1>
 
+        {{-- ส่วนสำหรับแสดงข้อความแจ้งเตือน (Alert) --}}
+        @if (session('ok'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <strong>{{ session('msg') }}</strong>
+            </div>
+        @endif
+
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="panel-title"><strong>รายการ</strong></div>
@@ -64,6 +74,7 @@
                             <td class="text-center">
                                 <a href="{{ URL::to('product/edit/' . $p->id) }}" class="btn btn-info btn-xs"><i
                                         class="fa fa-edit"></i> แก้ไข</a>
+                                {{-- ส่วนของการลบข้อมูล --}}
                                 <a href="#" class="btn btn-danger btn-xs btn-delete"
                                     id-delete="{{ $p->id }}"><i class="fa fa-trash"></i> ลบ</a>
                             </td>
@@ -95,15 +106,24 @@
         </div>
     </div>
 
-    {{-- ส่วนของ script ยังคงเดิม --}}
+    {{-- แก้ไขโดยการครอบด้วย $(document).ready() --}}
     <script>
-        $('.btn-delete').on('click', function(e) {
-            e.preventDefault(); // ป้องกันการวิ่งไปที่ #
-            var id = $(this).attr('id-delete');
-            if (confirm("คุณต้องการลบข้อมูลสินค้าหรือไม่?")) {
-                var url = "{{ URL::to('product/remove') }}" + '/' + id;
-                window.location.href = url;
-            }
+        $(document).ready(function() {
+            // ใช้ jQuery เพื่อ handle event click ของปุ่มลบ
+            $('.btn-delete').on('click', function(e) {
+                e.preventDefault(); // ป้องกันไม่ให้ลิงก์ทำงานตามปกติ (วิ่งไปที่ #)
+                
+                // ดึงค่า id จาก attribute 'id-delete'
+                var id = $(this).attr('id-delete');
+                
+                // แสดง dialog ยืนยันการลบ
+                if (confirm("คุณต้องการลบข้อมูลสินค้าหรือไม่?")) {
+                    // สร้าง URL สำหรับการลบ
+                    var url = "{{ URL::to('product/remove') }}" + '/' + id;
+                    // สั่งให้ browser วิ่งไปยัง URL ที่สร้างขึ้น
+                    window.location.href = url;
+                }
+            });
         });
     </script>
 @endsection
