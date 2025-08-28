@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Config, Validator;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Validator;
 class CategoryController extends Controller {
     var $rp = 2;
     public function category() {

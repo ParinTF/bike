@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('js/angular.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
@@ -26,7 +27,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     {{-- แนะนำให้ใช้ route() ในอนาคตเพื่อการจัดการที่ง่ายกว่า --}}
-                    <li><a href="{{ url('/') }}">หน้าแรก</a></li>
+                    <li><a href="{{ URL::to('home') }}">หน้าแรก</a></li>
                     <li><a href="{{ url('product') }}">ข้อมูลสินค้า</a></li>
                     <li><a href="{{ url('category') }}">ข้อมูลประเภท</a></li>
                     <li><a href="#">รายงาน</a></li>

@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Api\ProductControllerApi;
+use App\Http\Controllers\Api\CategoryControllerApi;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,3 +36,7 @@ Route::get('/category/edit/{id?}', [App\Http\Controllers\CategoryController::cla
 Route::post('/category/update', [App\Http\Controllers\CategoryController::class, 'update']);
 Route::post('/category/add', [App\Http\Controllers\CategoryController::class, 'insert']);
 Route::get('/category/remove/{id}', [App\Http\Controllers\CategoryController::class, 'remove']);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/api/product', [ProductControllerApi::class, 'product_list']);
+Route::get('/api/category', [CategoryControllerApi::class, 'category_list']);
